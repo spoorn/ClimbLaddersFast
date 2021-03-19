@@ -4,25 +4,30 @@
   "version": "${version}",
   "name": "ClimbLaddersFast",
   "description": "",
-  "authors": [],
-  "contact": {},
+  "authors": [
+    "spoorn"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/climb-ladders-fast"
+  },
   "license": "MIT",
   "icon": "assets/climbladdersfast/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "org.spoorn.climbladdersfast.client.ClimbladdersfastClient"
+      "org.spoorn.climbladdersfast.client.ClimbLaddersFastClient"
     ],
     "main": [
-      "org.spoorn.climbladdersfast.Climbladdersfast"
+      "org.spoorn.climbladdersfast.ClimbLaddersFast"
     ]
   },
   "mixins": [
     "climbladdersfast.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": "*",
     "fabric": "*",
-    "minecraft": "1.16.5"
+    "minecraft": ">=1.16.1",
+    "cloth-config2": "*"
   }
 }
