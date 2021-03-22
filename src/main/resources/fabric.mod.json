@@ -3,7 +3,7 @@
   "id": "climbladdersfast",
   "version": "${version}",
   "name": "ClimbLaddersFast",
-  "description": "",
+  "description": "Climb ladders and vines faster",
   "authors": [
     "spoorn"
   ],
@@ -19,6 +19,9 @@
     ],
     "main": [
       "org.spoorn.climbladdersfast.ClimbLaddersFast"
+    ],
+    "modmenu": [
+      "org.spoorn.climbladdersfast.config.ClimbLaddersFastModMenuApiImpl"
     ]
   },
   "mixins": [
@@ -29,5 +32,8 @@
     "fabric": "*",
     "minecraft": ">=1.16.1",
     "cloth-config2": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
   }
 }

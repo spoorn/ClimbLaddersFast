@@ -26,11 +26,20 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    // Mod Menu
+    modCompile("com.terraformersmc:modmenu:${project.modmenu_version}")
+    modRuntime("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 repositories {
     // Cloth Config
     maven { url "https://maven.shedaniel.me/" }
+
+    // Mod Menu
+    maven {
+        url "https://maven.terraformersmc.com/releases/"
+    }
 }
 
 processResources {
