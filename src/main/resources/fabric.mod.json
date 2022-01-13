@@ -8,7 +8,8 @@
     "spoorn"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/climb-ladders-fast"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/climb-ladders-fast",
+    "sources": "https://github.com/spoorn/ClimbLaddersFast"
   },
   "license": "MIT",
   "icon": "assets/climbladdersfast/icon.png",
@@ -30,8 +31,9 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.16.1",
-    "cloth-config2": "*"
+    "minecraft": ">=1.18.0",
+    "cloth-config2": "*",
+    "java": ">=17"
   },
   "suggests": {
     "modmenu": "*"

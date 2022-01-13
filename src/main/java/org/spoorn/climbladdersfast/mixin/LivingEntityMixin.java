@@ -26,24 +26,24 @@ public abstract class LivingEntityMixin {
             double y = vec3d.getY();
             // Go up or down ladder according to configured speed
             if (isEntityLookingUp(livingEntity)) {
-                y = getNormalizedPitch(livingEntity.pitch) * ModConfig.get().climbUpSpeed;
+                y = getNormalizedPitch(livingEntity.getPitch()) * ModConfig.get().climbUpSpeed;
             } else if (isEntityLookingDown(livingEntity)) {
-                y = getNormalizedPitch(livingEntity.pitch) * ModConfig.get().climbDownSpeed * -1.0;
+                y = getNormalizedPitch(livingEntity.getPitch()) * ModConfig.get().climbDownSpeed * -1.0;
             }
             cir.setReturnValue(new Vec3d(vec3d.getX(), y, vec3d.getZ()));
         }
     }
 
     private boolean isEntityLookingUp(LivingEntity livingEntity) {
-        return livingEntity.pitch < 0;
+        return livingEntity.getPitch() < 0;
     }
 
     private boolean isEntityLookingDown(LivingEntity livingEntity) {
-        return livingEntity.pitch > 0;
+        return livingEntity.getPitch() > 0;
     }
 
     private boolean isEntityLookingUpOrDown(LivingEntity livingEntity) {
-        return livingEntity.pitch != 0;
+        return livingEntity.getPitch() != 0;
     }
 
     private boolean isEntityStill(LivingEntity livingEntity) {
