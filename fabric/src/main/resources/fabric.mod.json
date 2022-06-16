@@ -3,7 +3,7 @@
   "id": "climbladdersfast",
   "version": "${version}",
   "name": "ClimbLaddersFast",
-  "description": "Climb ladders and vines faster",
+  "description": "Climb ladders, vines, and scaffolding faster",
   "authors": [
     "spoorn"
   ],
@@ -16,17 +16,17 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "org.spoorn.climbladdersfast.client.ClimbLaddersFastClient"
+      "org.spoorn.climbladdersfast.fabric.client.ClimbLaddersFastClientFabric"
     ],
     "main": [
-      "org.spoorn.climbladdersfast.ClimbLaddersFast"
+      "org.spoorn.climbladdersfast.fabric.ClimbLaddersFastFabric"
     ],
     "modmenu": [
-      "org.spoorn.climbladdersfast.config.ClimbLaddersFastModMenuApiImpl"
+      "org.spoorn.climbladdersfast.fabric.config.ClimbLaddersFastModMenuApiImpl"
     ]
   },
   "mixins": [
-    "climbladdersfast.mixins.json"
+    "climbladdersfast-common.mixins.json"
   ],
   "depends": {
     "fabricloader": "*",

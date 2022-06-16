@@ -1,14 +1,12 @@
 {
   "required": true,
-  "minVersion": "0.8",
   "package": "org.spoorn.climbladdersfast.mixin",
+  "minVersion": "0.8",
   "compatibilityLevel": "JAVA_16",
-  "mixins": [
-  ],
   "client": [
     "LivingEntityMixin"
   ],
-  "server": [
+  "mixins": [
   ],
   "injectors": {
     "defaultRequire": 1
