@@ -1,0 +1,42 @@
+modLoader = "javafml"
+loaderVersion = "[41,)"
+issueTrackerURL = "https://github.com/spoorn/ClimbLaddersFast/issues"
+license = "MIT"
+
+[[mods]]
+modId = "climbladdersfast"
+version = "${version}"
+displayName = "Climb Ladders Fast"
+authors = "spoorn"
+description = '''
+Climb ladders, vines, and scaffolding faster
+'''
+logoFile = "assets/climbladdersfast/icon.png"
+
+[[dependencies.climbladdersfast]]
+modId = "forge"
+mandatory = true
+versionRange = "[41,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.climbladdersfast]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.climbladdersfast]]
+modId = "architectury"
+mandatory = true
+versionRange = "[5.6.22,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.climbladdersfast]]
+modId = "cloth_config"
+mandatory = false
+versionRange = "[7,)"
+ordering = "NONE"
+side = "CLIENT"
