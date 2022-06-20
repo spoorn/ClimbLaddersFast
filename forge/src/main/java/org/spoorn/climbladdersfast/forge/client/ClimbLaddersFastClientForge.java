@@ -1,17 +1,17 @@
 package org.spoorn.climbladdersfast.forge.client;
 
 
-import dev.architectury.platform.Platform;
-import dev.architectury.utils.Env;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.spoorn.climbladdersfast.client.ClimbLaddersFastClient;
 
 public class ClimbLaddersFastClientForge {
 
     public static void init() {
-        if (Platform.getEnvironment() != Env.CLIENT) {
+        if (FMLEnvironment.dist != Dist.CLIENT) {
             return;
         }
-
+        
         ClimbLaddersFastClient.init();
     }
 }
