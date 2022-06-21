@@ -27,7 +27,8 @@ public class ScaffoldingBlockMixin extends Block {
 
     @Inject(method = "getCollisionShape", at = @At(value = "HEAD"), cancellable = true)
     private void removeScaffoldingCollision(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        if (ModConfig.get().disableScaffoldingCollision && context.isAbove(OUTLINE_SHAPE, pos, true) && !context.isDescending()) {
+        if (ModConfig.get().disableScaffoldingCollision && !ModConfig.get().disableScaffoldingFastClimbing 
+                && context.isAbove(OUTLINE_SHAPE, pos, true) && !context.isDescending()) {
             cir.setReturnValue(VoxelShapes.empty());
             cir.cancel();
         }
