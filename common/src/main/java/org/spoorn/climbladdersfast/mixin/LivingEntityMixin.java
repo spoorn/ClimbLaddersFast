@@ -1,8 +1,14 @@
 package org.spoorn.climbladdersfast.mixin;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -10,7 +16,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spoorn.climbladdersfast.config.ModConfig;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin {
+public abstract class LivingEntityMixin extends Entity {
+
+    private LivingEntityMixin(EntityType<?> type, World world) {
+        super(type, world);
+    }
 
     @Inject(method = "applyClimbingSpeed", at = @At(value = "TAIL"), cancellable = true)
     public void adjustClimbingSpeed(Vec3d motion, CallbackInfoReturnable<Vec3d> cir) {
@@ -19,6 +29,22 @@ public abstract class LivingEntityMixin {
         // Do nothing if entity isn't climbing, or is sneaking, or isn't a player
         if (!livingEntity.isClimbing() || livingEntity.isSneaking() || !(livingEntity instanceof PlayerEntity)) {
             return;
+        }
+        
+        // Check disable list
+        boolean disableScaffolding = ModConfig.get().disableScaffoldingFastClimbing;
+        boolean disableVines = ModConfig.get().disableVinesFastClimbing;
+        if (disableScaffolding || disableVines) {
+            BlockState climbingBlockState = super.getBlockStateAtPos();
+            if (climbingBlockState != null) {   // Should always be true as isClimbing() implicitly checks this
+                String id = Registry.BLOCK.getId(climbingBlockState.getBlock()).toString();
+                // Climbable identifiers: https://minecraft.fandom.com/wiki/Tag
+                // and in climbable.json
+                if ((disableScaffolding && id.equals(Registry.BLOCK.getId(Blocks.SCAFFOLDING).toString()))
+                    || (disableVines && id.contains("vine"))) {
+                    return;
+                }
+            }
         }
 
         if (isEntityLookingUpOrDown(livingEntity) && isEntityStill(livingEntity)) {
