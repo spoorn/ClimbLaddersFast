@@ -15,6 +15,9 @@ public class ModConfig implements ConfigData {
 
     @Comment("Speed for climbing down ladders [default = 0.4]")
     public double climbDownSpeed = 0.4;
+    
+    @Comment("True to disable collisions with Scaffolding, allowing fast climbing down scaffolding just like ladders [default = true]")
+    public boolean disableScaffoldingCollision = true;
 
     public static void init() {
         AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);

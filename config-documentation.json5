@@ -2,5 +2,7 @@
   // Speed for climbing up ladders [default = 0.4]
   "climbUpSpeed": 0.4,
   // Speed for climbing down ladders [default = 0.4]
-  "climbDownSpeed": 0.4
+  "climbDownSpeed": 0.4,
+  // True to disable collisions with Scaffolding, allowing fast climbing down scaffolding just like ladders [default = true]
+  "disableScaffoldingCollision": true
 }

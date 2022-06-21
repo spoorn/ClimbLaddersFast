@@ -1,5 +1,6 @@
 {
-  "text.autoconfig.ClimbLaddersFast.option.climbUpSpeed": "Climb Up Speed",
-  "text.autoconfig.ClimbLaddersFast.option.climbDownSpeed": "Climb Down Speed",
-  "text.autoconfig.ClimbLaddersFast.title": "ClimbLaddersFast"
+  "text.autoconfig.climbladdersfast.option.climbUpSpeed": "Climb Up Speed",
+  "text.autoconfig.climbladdersfast.option.climbDownSpeed": "Climb Down Speed",
+  "text.autoconfig.climbladdersfast.option.disableScaffoldingCollision": "Disable Scaffolding Collision",
+  "text.autoconfig.climbladdersfast.title": "ClimbLaddersFast"
 }
