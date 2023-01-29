@@ -29,7 +29,7 @@ side = "BOTH"
 
 [[dependencies.climbladdersfast]]
 modId = "cloth_config"
-mandatory = false
+mandatory = true
 versionRange = "[6,)"
 ordering = "NONE"
 side = "CLIENT"
