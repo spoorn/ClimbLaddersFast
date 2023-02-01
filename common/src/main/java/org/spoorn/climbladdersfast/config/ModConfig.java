@@ -9,6 +9,8 @@ import org.spoorn.climbladdersfast.ClimbLaddersFast;
 
 @Config(name = ClimbLaddersFast.MODID)
 public class ModConfig implements ConfigData {
+    
+    public static boolean registered = false;
 
     @Comment("Speed for climbing up ladders [default = 0.4]")
     public double climbUpSpeed = 0.4;
@@ -26,10 +28,17 @@ public class ModConfig implements ConfigData {
     public boolean disableVinesFastClimbing = false;
 
     public static void init() {
-        AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
+        if (!registered) {
+            AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
+            registered = true;
+        }
     }
 
     public static ModConfig get() {
+        // Due to https://github.com/spoorn/ClimbLaddersFast/issues/9
+        if (!registered) {
+            init();
+        }
         return AutoConfig.getConfigHolder(ModConfig.class).getConfig();
     }
 }

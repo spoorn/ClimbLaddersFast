@@ -6,8 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,10 +37,10 @@ public abstract class LivingEntityMixin extends Entity {
         if (disableScaffolding || disableVines) {
             BlockState climbingBlockState = super.getBlockStateAtPos();
             if (climbingBlockState != null) {   // Should always be true as isClimbing() implicitly checks this
-                String id = Registry.BLOCK.getId(climbingBlockState.getBlock()).toString();
+                String id = Registries.BLOCK.getId(climbingBlockState.getBlock()).toString();
                 // Climbable identifiers: https://minecraft.fandom.com/wiki/Tag
                 // and in climbable.json
-                if ((disableScaffolding && id.equals(Registry.BLOCK.getId(Blocks.SCAFFOLDING).toString()))
+                if ((disableScaffolding && id.equals(Registries.BLOCK.getId(Blocks.SCAFFOLDING).toString()))
                     || (disableVines && id.contains("vine"))) {
                     return;
                 }
