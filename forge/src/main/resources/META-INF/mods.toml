@@ -11,7 +11,7 @@ authors = "spoorn"
 description = '''
 Climb ladders, vines, and scaffolding faster
 '''
-logoFile = "assets/climbladdersfast/icon.png"
+logoFile = "climbladdersfast.png"
 
 [[dependencies.climbladdersfast]]
 modId = "forge"
