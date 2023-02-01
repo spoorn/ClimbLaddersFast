@@ -12,7 +12,7 @@
     "sources": "https://github.com/spoorn/ClimbLaddersFast"
   },
   "license": "MIT",
-  "icon": "icon.png",
+  "icon": "assets/climbladdersfast/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
