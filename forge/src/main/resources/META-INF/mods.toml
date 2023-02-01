@@ -11,7 +11,7 @@ authors = "spoorn"
 description = '''
 Climb ladders, vines, and scaffolding faster
 '''
-logoFile = "assets/climbladdersfast/icon.png"
+logoFile = "icon.png"
 
 [[dependencies.climbladdersfast]]
 modId = "forge"
@@ -28,15 +28,8 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.climbladdersfast]]
-modId = "architectury"
-mandatory = false
-versionRange = "[5.6.22,)"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies.climbladdersfast]]
 modId = "cloth_config"
-mandatory = false
+mandatory = true
 versionRange = "[7,)"
 ordering = "NONE"
 side = "CLIENT"
