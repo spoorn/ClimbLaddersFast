@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[41,)"
+loaderVersion = "[47,)"
 issueTrackerURL = "https://github.com/spoorn/ClimbLaddersFast/issues"
 license = "MIT"
 
@@ -16,27 +16,20 @@ logoFile = "climbladdersfast.png"
 [[dependencies.climbladdersfast]]
 modId = "forge"
 mandatory = true
-versionRange = "[41,)"
+versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.climbladdersfast]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19,)"
+versionRange = "[1.20,)"
 ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.climbladdersfast]]
-modId = "architectury"
-mandatory = false
-versionRange = "[5.6.22,)"
-ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.climbladdersfast]]
 modId = "cloth_config"
 mandatory = false
-versionRange = "[7,)"
+versionRange = "[11,)"
 ordering = "NONE"
 side = "CLIENT"

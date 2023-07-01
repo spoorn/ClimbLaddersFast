@@ -10,7 +10,6 @@ public class ClimbLaddersFast {
     
     public static void init() {
         log.info("Hello from ClimbLaddersFast!");
-        
         ModConfig.init();
     }
 }

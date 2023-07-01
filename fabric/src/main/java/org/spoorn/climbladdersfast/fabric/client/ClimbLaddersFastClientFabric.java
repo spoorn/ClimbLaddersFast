@@ -7,7 +7,6 @@ import org.spoorn.climbladdersfast.client.ClimbLaddersFastClient;
 
 @Environment(EnvType.CLIENT)
 public class ClimbLaddersFastClientFabric implements ClientModInitializer {
-
     @Override
     public void onInitializeClient() {
         ClimbLaddersFastClient.init();
