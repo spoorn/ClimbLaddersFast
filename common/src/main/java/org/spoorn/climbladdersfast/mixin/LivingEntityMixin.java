@@ -24,6 +24,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "applyClimbingSpeed", at = @At(value = "TAIL"), cancellable = true)
     public void adjustClimbingSpeed(Vec3d motion, CallbackInfoReturnable<Vec3d> cir) {
+        if (!ModConfig.get().enabled) {
+            return;
+        }
+        
         LivingEntity livingEntity = (LivingEntity) (Object) this;
 
         // Do nothing if entity isn't climbing, or is sneaking, or isn't a player

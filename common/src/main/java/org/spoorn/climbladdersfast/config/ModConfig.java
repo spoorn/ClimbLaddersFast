@@ -3,6 +3,7 @@ package org.spoorn.climbladdersfast.config;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import org.spoorn.climbladdersfast.ClimbLaddersFast;
@@ -10,7 +11,11 @@ import org.spoorn.climbladdersfast.ClimbLaddersFast;
 @Config(name = ClimbLaddersFast.MODID)
 public class ModConfig implements ConfigData {
     
+    @ConfigEntry.Gui.Excluded
     public static boolean registered = false;
+    
+    @Comment("True to enable ClimbLaddersFast, false to disable.  This is also toggled by the toggle keybind in controls. [default = true]")
+    public boolean enabled = true;
 
     @Comment("Speed for climbing up ladders [default = 0.4]")
     public double climbUpSpeed = 0.4;
