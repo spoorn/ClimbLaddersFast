@@ -26,6 +26,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
+    env:
+      CURSEFORGE_PROJECT_ID: 459522
+      # MODRINTH_PROJECT_ID: ${{ vars.MODRINTH_PROJECT_ID || secrets.MODRINTH_PROJECT_ID }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,9 +59,9 @@ jobs:
       - name: Publish Fabric
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          curseforge-id: 459522
+          curseforge-id: ${{ env.CURSEFORGE_PROJECT_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-#          modrinth-id: ${{ vars.MODRINTH_PROJECT_ID || secrets.MODRINTH_PROJECT_ID }}
+#          modrinth-id: ${{ env.MODRINTH_PROJECT_ID }}
 #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
           files: fabric/build/libs/climbladdersfast-${{ steps.props.outputs.mod_version }}-fabric.jar
@@ -79,10 +83,10 @@ jobs:
       - name: Publish NeoForge
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID || secrets.CURSEFORGE_PROJECT_ID }}
+          curseforge-id: ${{ env.CURSEFORGE_PROJECT_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          modrinth-id: ${{ vars.MODRINTH_PROJECT_ID || secrets.MODRINTH_PROJECT_ID }}
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+#          modrinth-id: ${{ env.MODRINTH_PROJECT_ID }}
+#          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
           files: neoforge/build/libs/climbladdersfast-${{ steps.props.outputs.mod_version }}-neoforge.jar
           name: ClimbLaddersFast ${{ steps.props.outputs.mod_version }} NeoForge
