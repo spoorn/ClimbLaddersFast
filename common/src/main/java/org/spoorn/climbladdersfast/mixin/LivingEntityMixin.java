@@ -39,7 +39,7 @@ public abstract class LivingEntityMixin extends Entity {
         boolean disableScaffolding = ModConfig.get().disableScaffoldingFastClimbing;
         boolean disableVines = ModConfig.get().disableVinesFastClimbing;
         if (disableScaffolding || disableVines) {
-            BlockState climbingBlockState = super.getFeetBlockState();
+            BlockState climbingBlockState = super.getInBlockState();
             if (climbingBlockState != null) {   // Should always be true as onClimbable() implicitly checks this
                 String id = BuiltInRegistries.BLOCK.getKey(climbingBlockState.getBlock()).toString();
                 // Climbable identifiers: https://minecraft.fandom.com/wiki/Tag
