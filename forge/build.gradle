@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.gradleup.shadow" version "9.4.2"
 }
 
 architectury {
@@ -28,7 +28,7 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    common(project(path: ":common", configuration: "namedElements")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
     // Remove the next line if you don't want to depend on the API
@@ -39,7 +39,7 @@ dependencies {
 
 repositories {
     // Cloth Config
-    maven { url "https://maven.shedaniel.me/" }
+    maven { url = uri("https://maven.shedaniel.me/") }
 }
 
 processResources {
@@ -55,18 +55,17 @@ shadowJar {
     exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
+    archiveClassifier.set("dev-shadow")
 }
 
 remapJar {
-    input.set shadowJar.archiveFile
+    inputFile.set(shadowJar.archiveFile)
     dependsOn shadowJar
-    classifier null
-    archiveClassifier = "forge"
+    archiveClassifier.set("forge")
 }
 
 jar {
-    classifier "dev"
+    archiveClassifier.set("dev")
 }
 
 sourcesJar {

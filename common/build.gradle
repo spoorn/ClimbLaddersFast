@@ -1,5 +1,5 @@
 plugins {
-    id "io.freefair.lombok" version "6.3.0"
+    id "io.freefair.lombok" version "9.5.0"
 }
 
 architectury {
@@ -23,11 +23,11 @@ dependencies {
 
 repositories {
     // Cloth Config
-    maven { url "https://maven.shedaniel.me/" }
+    maven { url = uri("https://maven.shedaniel.me/") }
 
     // Mod Menu
     maven {
-        url "https://maven.terraformersmc.com/releases/"
+        url = uri("https://maven.terraformersmc.com/releases/")
     }
 }
 
