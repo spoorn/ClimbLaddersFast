@@ -1,14 +1,14 @@
 package org.spoorn.climbladdersfast.mixin;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,12 +18,12 @@ import org.spoorn.climbladdersfast.config.ModConfig;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
-    private LivingEntityMixin(EntityType<?> type, World world) {
+    private LivingEntityMixin(EntityType<?> type, Level world) {
         super(type, world);
     }
 
-    @Inject(method = "applyClimbingSpeed", at = @At(value = "TAIL"), cancellable = true)
-    public void adjustClimbingSpeed(Vec3d motion, CallbackInfoReturnable<Vec3d> cir) {
+    @Inject(method = "handleOnClimbable", at = @At(value = "TAIL"), cancellable = true)
+    public void adjustClimbingSpeed(Vec3 motion, CallbackInfoReturnable<Vec3> cir) {
         if (!ModConfig.get().enabled) {
             return;
         }
@@ -31,7 +31,7 @@ public abstract class LivingEntityMixin extends Entity {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
 
         // Do nothing if entity isn't climbing, or is sneaking, or isn't a player
-        if (!livingEntity.isClimbing() || livingEntity.isSneaking() || !(livingEntity instanceof PlayerEntity)) {
+        if (!livingEntity.onClimbable() || livingEntity.isShiftKeyDown() || !(livingEntity instanceof Player)) {
             return;
         }
         
@@ -39,12 +39,12 @@ public abstract class LivingEntityMixin extends Entity {
         boolean disableScaffolding = ModConfig.get().disableScaffoldingFastClimbing;
         boolean disableVines = ModConfig.get().disableVinesFastClimbing;
         if (disableScaffolding || disableVines) {
-            BlockState climbingBlockState = super.getBlockStateAtPos();
-            if (climbingBlockState != null) {   // Should always be true as isClimbing() implicitly checks this
-                String id = Registries.BLOCK.getId(climbingBlockState.getBlock()).toString();
+            BlockState climbingBlockState = super.getFeetBlockState();
+            if (climbingBlockState != null) {   // Should always be true as onClimbable() implicitly checks this
+                String id = BuiltInRegistries.BLOCK.getKey(climbingBlockState.getBlock()).toString();
                 // Climbable identifiers: https://minecraft.fandom.com/wiki/Tag
                 // and in climbable.json
-                if ((disableScaffolding && id.equals(Registries.BLOCK.getId(Blocks.SCAFFOLDING).toString()))
+                if ((disableScaffolding && id.equals(BuiltInRegistries.BLOCK.getKey(Blocks.SCAFFOLDING).toString()))
                     || (disableVines && id.contains("vine"))) {
                     return;
                 }
@@ -52,32 +52,32 @@ public abstract class LivingEntityMixin extends Entity {
         }
 
         if (isEntityLookingUpOrDown(livingEntity) && isEntityStill(livingEntity)) {
-            Vec3d vec3d = cir.getReturnValue();
-            double y = vec3d.getY();
+            Vec3 vec3d = cir.getReturnValue();
+            double y = vec3d.y;
             // Go up or down ladder according to configured speed
             if (isEntityLookingUp(livingEntity)) {
-                y = getNormalizedPitch(livingEntity.getPitch()) * ModConfig.get().climbUpSpeed;
+                y = getNormalizedPitch(livingEntity.getXRot()) * ModConfig.get().climbUpSpeed;
             } else if (isEntityLookingDown(livingEntity)) {
-                y = getNormalizedPitch(livingEntity.getPitch()) * ModConfig.get().climbDownSpeed * -1.0;
+                y = getNormalizedPitch(livingEntity.getXRot()) * ModConfig.get().climbDownSpeed * -1.0;
             }
-            cir.setReturnValue(new Vec3d(vec3d.getX(), y, vec3d.getZ()));
+            cir.setReturnValue(new Vec3(vec3d.x, y, vec3d.z));
         }
     }
 
     private boolean isEntityLookingUp(LivingEntity livingEntity) {
-        return livingEntity.getPitch() < 0;
+        return livingEntity.getXRot() < 0;
     }
 
     private boolean isEntityLookingDown(LivingEntity livingEntity) {
-        return livingEntity.getPitch() > 0;
+        return livingEntity.getXRot() > 0;
     }
 
     private boolean isEntityLookingUpOrDown(LivingEntity livingEntity) {
-        return livingEntity.getPitch() != 0;
+        return livingEntity.getXRot() != 0;
     }
 
     private boolean isEntityStill(LivingEntity livingEntity) {
-        return livingEntity.forwardSpeed == 0;
+        return livingEntity.zza == 0;
     }
 
     private double getNormalizedPitch(float pitch) {

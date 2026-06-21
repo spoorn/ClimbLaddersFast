@@ -43,10 +43,11 @@ repositories {
 }
 
 processResources {
-    inputs.property "version", project.version
+    def modVersion = project.version
+    inputs.property "version", modVersion
 
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+        expand "version": modVersion
     }
 }
 

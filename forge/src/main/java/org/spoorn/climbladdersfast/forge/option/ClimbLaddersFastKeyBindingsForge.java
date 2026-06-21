@@ -1,6 +1,6 @@
 package org.spoorn.climbladdersfast.forge.option;
 
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -14,8 +14,8 @@ public class ClimbLaddersFastKeyBindingsForge {
     public static class ClientForgeEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
-            if (KeyBindings.toggle.wasPressed()) {
-                KeyBindings.handleToggle(MinecraftClient.getInstance().player);
+            if (KeyBindings.toggle.consumeClick()) {
+                KeyBindings.handleToggle(Minecraft.getInstance().player);
             }
         }
     }

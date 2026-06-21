@@ -1,16 +1,15 @@
 package org.spoorn.climbladdersfast.mixin;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ScaffoldingBlock;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ScaffoldingBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -19,17 +18,15 @@ import org.spoorn.climbladdersfast.config.ModConfig;
 @Mixin(ScaffoldingBlock.class)
 public class ScaffoldingBlockMixin extends Block {
 
-    @Shadow @Final private static VoxelShape OUTLINE_SHAPE;
-
-    protected ScaffoldingBlockMixin(Settings settings) {
+    protected ScaffoldingBlockMixin(BlockBehaviour.Properties settings) {
         super(settings);
     }
 
     @Inject(method = "getCollisionShape", at = @At(value = "HEAD"), cancellable = true)
-    private void removeScaffoldingCollision(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
+    private void removeScaffoldingCollision(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
         if (ModConfig.get().disableScaffoldingCollision && !ModConfig.get().disableScaffoldingFastClimbing 
-                && context.isAbove(OUTLINE_SHAPE, pos, true) && !context.isDescending()) {
-            cir.setReturnValue(VoxelShapes.empty());
+                && context.isAbove(Shapes.block(), pos, true) && !context.isDescending()) {
+            cir.setReturnValue(Shapes.empty());
             cir.cancel();
         }
     }

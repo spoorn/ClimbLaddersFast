@@ -13,7 +13,7 @@ public class ClimbLaddersFastKeyBindingsFabric {
         KeyBindings.toggle = KeyBindingHelper.registerKeyBinding(KeyBindings.toggle);
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (KeyBindings.toggle.wasPressed()) {
+            while (KeyBindings.toggle.consumeClick()) {
                 KeyBindings.handleToggle(client.player);
             }
         });
