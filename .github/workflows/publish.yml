@@ -1,10 +1,17 @@
 name: Publish Mods
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
+      platform:
+        description: Platform jar(s) to publish
+        required: true
+        default: both
+        type: choice
+        options:
+          - both
+          - fabric
+          - neoforge
       version_type:
         description: Release channel for CurseForge and Modrinth
         required: true
@@ -57,6 +64,7 @@ jobs:
         run: ./gradlew build --no-daemon --warning-mode all
 
       - name: Publish Fabric
+        if: ${{ inputs.platform == 'both' || inputs.platform == 'fabric' }}
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           curseforge-id: ${{ env.CURSEFORGE_PROJECT_ID }}
@@ -67,8 +75,8 @@ jobs:
           files: fabric/build/libs/climbladdersfast-${{ steps.props.outputs.mod_version }}-fabric.jar
           name: ClimbLaddersFast ${{ steps.props.outputs.mod_version }} Fabric
           version: ${{ steps.props.outputs.mod_version }}-fabric
-          version-type: ${{ inputs.version_type || (github.event.release.prerelease && 'beta' || 'release') }}
-          changelog: ${{ github.event.release.body || inputs.changelog || 'See the GitHub release for details.' }}
+          version-type: ${{ inputs.version_type }}
+          changelog: ${{ inputs.changelog || 'Updated mod' }}
 
           loaders: fabric
           game-versions: ${{ steps.props.outputs.minecraft_version }}
@@ -81,6 +89,7 @@ jobs:
             modmenu(optional){curseforge:308702}{modrinth:mOgUt4GM}
 
       - name: Publish NeoForge
+        if: ${{ inputs.platform == 'both' || inputs.platform == 'neoforge' }}
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           curseforge-id: ${{ env.CURSEFORGE_PROJECT_ID }}
@@ -91,8 +100,8 @@ jobs:
           files: neoforge/build/libs/climbladdersfast-${{ steps.props.outputs.mod_version }}-neoforge.jar
           name: ClimbLaddersFast ${{ steps.props.outputs.mod_version }} NeoForge
           version: ${{ steps.props.outputs.mod_version }}-neoforge
-          version-type: ${{ inputs.version_type || (github.event.release.prerelease && 'beta' || 'release') }}
-          changelog: ${{ github.event.release.body || inputs.changelog || 'See the GitHub release for details.' }}
+          version-type: ${{ inputs.version_type }}
+          changelog: ${{ inputs.changelog || 'Updated mod' }}
 
           loaders: neoforge
           game-versions: ${{ steps.props.outputs.minecraft_version }}
