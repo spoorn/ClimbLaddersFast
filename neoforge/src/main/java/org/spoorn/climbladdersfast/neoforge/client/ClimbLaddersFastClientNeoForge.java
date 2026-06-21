@@ -8,7 +8,7 @@ import org.spoorn.climbladdersfast.client.ClimbLaddersFastClient;
 public class ClimbLaddersFastClientNeoForge {
 
     public static void init() {
-        if (FMLEnvironment.dist != Dist.CLIENT) {
+        if (FMLEnvironment.getDist() != Dist.CLIENT) {
             return;
         }
         

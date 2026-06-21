@@ -6,7 +6,7 @@
   "text.autoconfig.climbladdersfast.option.disableVinesFastClimbing": "Disable Vines Fast Climbing",
   "text.autoconfig.climbladdersfast.title": "ClimbLaddersFast",
   "key.climbladdersfast.toggle": "Toggle enable/disable",
-  "category.climbladdersfast.options": "ClimbLaddersFast",
+  "key.category.climbladdersfast.options": "ClimbLaddersFast",
   "climbladdersfast.toggle.enabled": "ClimbLaddersFast enabled",
   "climbladdersfast.toggle.disabled": "ClimbLaddersFast disabled"
 }

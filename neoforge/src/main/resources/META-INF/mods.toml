@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[4,)"
+loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/spoorn/ClimbLaddersFast/issues"
 license = "MIT"
 
@@ -19,20 +19,20 @@ config = "climbladdersfast-common.mixins.json"
 [[dependencies.climbladdersfast]]
 modId = "neoforge"
 mandatory = true
-versionRange = "[21.1,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.climbladdersfast]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.21.1,1.21.2)"
+versionRange = "[26.2,26.3)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.climbladdersfast]]
 modId = "cloth_config"
 mandatory = false
-versionRange = "[16,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "CLIENT"

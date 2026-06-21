@@ -22,11 +22,11 @@ configurations {
 dependencies {
     neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive = false }
+    common(project(path: ":common")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
     // Cloth Config
-    modApi "me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}"
+    implementation "me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}"
 }
 
 repositories {
@@ -51,12 +51,6 @@ shadowJar {
     exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    archiveClassifier.set("dev-shadow")
-}
-
-remapJar {
-    inputFile.set(shadowJar.archiveFile)
-    dependsOn shadowJar
     archiveClassifier.set("neoforge")
 }
 
