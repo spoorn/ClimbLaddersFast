@@ -1,4 +1,5 @@
 {
+  "text.autoconfig.climbladdersfast.option.enabled": "Enabled",
   "text.autoconfig.climbladdersfast.option.climbUpSpeed": "Climb Up Speed",
   "text.autoconfig.climbladdersfast.option.climbDownSpeed": "Climb Down Speed",
   "text.autoconfig.climbladdersfast.option.disableScaffoldingFastClimbing": "Disable Scaffolding Fast Climbing",

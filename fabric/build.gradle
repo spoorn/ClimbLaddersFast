@@ -49,6 +49,9 @@ processResources {
     def modVersion = project.version
     inputs.property "version", modVersion
 
+    from(project(":common").loom.accessWidenerPath)
+    from(project(":common").file("src/main/resources/climbladdersfast-common.mixins.json"))
+
     filesMatching("fabric.mod.json") {
         expand "version": modVersion
     }

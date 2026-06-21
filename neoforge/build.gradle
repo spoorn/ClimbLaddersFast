@@ -41,7 +41,9 @@ processResources {
     def modVersion = project.version
     inputs.property "version", modVersion
 
-    filesMatching("META-INF/mods.toml") {
+    from(project(":common").file("src/main/resources/climbladdersfast-common.mixins.json"))
+
+    filesMatching("META-INF/neoforge.mods.toml") {
         expand "version": modVersion
     }
 }
