@@ -1,11 +1,11 @@
-package org.spoorn.climbladdersfast.forge.client;
+package org.spoorn.climbladdersfast.neoforge.client;
 
 
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.spoorn.climbladdersfast.client.ClimbLaddersFastClient;
 
-public class ClimbLaddersFastClientForge {
+public class ClimbLaddersFastClientNeoForge {
 
     public static void init() {
         if (FMLEnvironment.dist != Dist.CLIENT) {

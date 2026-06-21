@@ -1,17 +1,17 @@
-package org.spoorn.climbladdersfast.forge.option;
+package org.spoorn.climbladdersfast.neoforge.option;
 
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.spoorn.climbladdersfast.ClimbLaddersFast;
 import org.spoorn.climbladdersfast.option.KeyBindings;
 
-public class ClimbLaddersFastKeyBindingsForge {
+public class ClimbLaddersFastKeyBindingsNeoForge {
     @Mod.EventBusSubscriber(modid = ClimbLaddersFast.MODID, value = Dist.CLIENT)
-    public static class ClientForgeEvents {
+    public static class ClientNeoForgeEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if (KeyBindings.toggle.consumeClick()) {

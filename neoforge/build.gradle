@@ -4,17 +4,11 @@ plugins {
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-        mixinConfig "climbladdersfast-common.mixins.json"
-    }
 }
 
 configurations {
@@ -22,22 +16,23 @@ configurations {
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+    developmentNeoForge.extendsFrom common
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
+    neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
-    // Remove the next line if you don't want to depend on the API
-    //modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
-
-    modApi "me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}"
+    // Cloth Config
+    modApi "me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}"
 }
 
 repositories {
+    // NeoForge
+    maven { url = uri("https://maven.neoforged.net/releases/") }
+
     // Cloth Config
     maven { url = uri("https://maven.shedaniel.me/") }
 }
@@ -62,7 +57,7 @@ shadowJar {
 remapJar {
     inputFile.set(shadowJar.archiveFile)
     dependsOn shadowJar
-    archiveClassifier.set("forge")
+    archiveClassifier.set("neoforge")
 }
 
 jar {
@@ -83,7 +78,7 @@ components.java {
 
 publishing {
     publications {
-        mavenForge(MavenPublication) {
+        mavenNeoForge(MavenPublication) {
             artifactId = rootProject.archives_base_name + "-" + project.name
             from components.java
         }
